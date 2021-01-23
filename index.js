@@ -25,34 +25,34 @@ client.on("message", async (message) => {
 		const botToken = await getAccesToken();
 		const reportData = await getReportData(botToken, reportCode);
 
-		if (reportData.reportData.report.fights.length > 1)
+		if (reportData.reportData.report.rankings.data.length > 1)
 			return message.reply(
 				"Make sure your report contains only one dungeon report."
             );
             
-		const relatedFight = reportData.reportData.report.fights[0];
-        const masterData = reportData.reportData.report.masterData;
+		const relatedFight = reportData.reportData.report.rankings.data[0];
+        const teamData = reportData.reportData.report.rankings.data.team;
         
 		const beautifiedCombatLog = new Discord.MessageEmbed()
 			.setColor("#edae1a")
 			.setAuthor(
-				relatedFight.name +
+				relatedFight.encounter.name +
 					" +" +
-					relatedFight.keystoneLevel +
+					relatedFight.bracketData +
 					" (" +
-					getCompletionTime(relatedFight.keystoneTime) +
+					getCompletionTime(relatedFight.duration) +
 					")",
 				null,
 				"https://www.warcraftlogs.com/reports/" + reportCode
 			)
 			.addField(
 				"Players:",
-				masterData.actors.map(
-					(item) => '**' + item.name + '**' + " (" + getSpecName(item.icon) + ")"
+				teamData.map(
+					(item) => '**' + item.name + '**' + " (" + item.spec + ' ' + item.class + ")"
 				),
 				false
 			)
-            .setImage(getBackgroundUrl(relatedFight.name));
+            .setImage(getBackgroundUrl(relatedFight.encounter.name));
         message.channel.send(beautifiedCombatLog);
 	} catch (error) {
 		return console.log(error.message);

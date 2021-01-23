@@ -9,7 +9,7 @@ module.exports = async function (token, code) {
 			Authorization: "Bearer " + token,
 		},
 		data: {
-			query: `query reportData {\n  reportData{\n    report(\n      code: "${code}"\n    ) {\n      fights {\n        keystoneLevel\n        keystoneAffixes\n        keystoneTime\n        name\n      }\n      masterData {\n        actors(type:"player") {\n          name\n          icon\n          subType\n        }\n      }\n    }\n  }\n}`,
+			query: `query reportData {\n  reportData{\n    report(\n      code: ${code}\n    ) {\n      graph(dataType:DamageDone, startTime:0 , endTime:999999999)\n      rankings(compare:Parses)\n    }\n  }\n}","operationName":"reportData"}`,
 			operationName: "reportData",
 		},
 	};
