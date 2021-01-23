@@ -1080,3 +1080,17 @@ node_modules/ws/lib/stream.js
 node_modules/ws/lib/validation.js
 node_modules/ws/lib/websocket-server.js
 node_modules/ws/lib/websocket.js
+exampleData.json
+exampleJSON.js
+test.js
+embedMaker.js
+node_modules/.bin/n
+node_modules/.bin/nvm
+node_modules/n/CHANGELOG.md
+node_modules/n/LICENSE
+node_modules/n/bin/n
+node_modules/nvm/.npmignore
+node_modules/nvm/package.json
+node_modules/nvm/README.md
+node_modules/nvm/bin/aliases.json
+node_modules/nvm/bin/nvm
