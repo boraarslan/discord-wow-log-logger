@@ -11,7 +11,11 @@ const config = {
 	},
 };
 
-module.exports = async function run() {
+//This code should be rewritten to get just the access token and not
+//requesting token. this is just lazy and might cause tons of errors
+//later in the future
+
+module.exports = async () => {
 	const rawStaticTokenData = fs.readFileSync("token.json");
 	const staticTokenData = JSON.parse(rawStaticTokenData);
 
