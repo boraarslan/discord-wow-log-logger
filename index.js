@@ -25,13 +25,13 @@ client.on("message", async (message) => {
 		const botToken = await getAccesToken();
 		const reportData = await getReportData(botToken, reportCode);
 
-		if (reportData.reportData.report.rankings.data.length > 1)
+		if (reportData.report.rankings.data.length > 1)
 			return message.reply(
 				"Make sure your report contains only one dungeon report."
             );
             
-		const relatedFight = reportData.reportData.report.rankings.data[0];
-        const teamData = reportData.reportData.report.rankings.data.team;
+		const relatedFight = reportData.report.rankings.data[0];
+        const teamData = relatedFight.team;
         
 		const beautifiedCombatLog = new Discord.MessageEmbed()
 			.setColor("#edae1a")
