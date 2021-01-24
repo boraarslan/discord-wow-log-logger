@@ -9,7 +9,18 @@ module.exports = async function (token, code) {
 			Authorization: "Bearer " + token,
 		},
 		data: {
-			query: `query reportData {\n  reportData{\n    report(\n      code: "${code}"\n    ) {\n      graph(dataType:DamageDone, startTime:0 , endTime:999999999)\n      rankings(compare:Parses)\n    }\n  }\n}`,
+			query: `
+			query reportData {
+				reportData{
+					report(
+						code: "${code}"
+					) {
+						graph(dataType:DamageDone, startTime:0 , endTime:999999999)
+						rankings(compare:Parses)
+						startTime
+					}
+				}
+			}`,
 			operationName: "reportData",
 		},
 	};
