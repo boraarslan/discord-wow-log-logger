@@ -3,7 +3,7 @@ const backgroundBaseUrl = 'https://cdnassets.raider.io/images/dungeons/expansion
 const staticAffixes = keyaffix.affixes;
 
 const getBackgroundUrl = (mapName) => {
-    return backgroundBaseUrl + mapName.toLowerCase().replace(' ', '-') + '.jpg';
+    return backgroundBaseUrl + mapName.toLowerCase().replace(/ /g,'-') + '.jpg';
 }
 
 const getClassImagePath = (className) => {
@@ -28,7 +28,7 @@ const getCompletionTime = (time) => {
         minutes = (minutes < 10) ? "0" + minutes : minutes;
         seconds = (seconds < 10) ? "0" + seconds : seconds;
       
-        return (!hours) ? (minutes + ":" + seconds + "." + milliseconds) : (hours + ":" + minutes + ":" + seconds + "." + milliseconds);
+        return (!hours) ? (minutes + ":" + seconds) : (hours + ":" + minutes + ":" + seconds);
     }
     return msToTime(time);
 }

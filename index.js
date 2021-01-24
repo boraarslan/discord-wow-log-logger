@@ -1,13 +1,9 @@
-const getAccesToken = require("../logsApi/accessToken");
-const getReportData = require("../logsApi/reportData");
+const getAccesToken = require("./logsApi/accessToken");
+const getReportData = require("./logsApi/reportData");
 const Discord = require("discord.js");
-const {
-	getCompletionTime,
-	getSpecName,
-	getBackgroundUrl,
-} = require("../logsApi/linkData");
 const client = new Discord.Client();
 const fs = require("fs");
+const embedMaker = require("./embedMaker");
 const files = fs.readdirSync(__dirname);
 
 client.on("ready", () => {
@@ -50,40 +46,11 @@ client.on("message", async (message) => {
 				"Make sure your report contains only one dungeon report."
 			);
 
-		const relatedFight = reportData.report.rankings.data[0];
-		const teamData = relatedFight.team;
-
-		const beautifiedCombatLog = new Discord.MessageEmbed()
-			.setColor("#edae1a")
-			.setAuthor(
-				relatedFight.encounter.name +
-					" +" +
-					relatedFight.bracketData +
-					" (" +
-					getCompletionTime(relatedFight.duration) +
-					")",
-				null,
-				"https://www.warcraftlogs.com/reports/" + reportCode
-			)
-			.addField(
-				"Players:",
-				teamData.map(
-					(item) =>
-						"**" +
-						item.name +
-						"**" +
-						" (" +
-						item.spec +
-						" " +
-						item.class +
-						")"
-				),
-				false
-			)
-			.setImage(getBackgroundUrl(relatedFight.encounter.name));
-		message.channel.send(beautifiedCombatLog);
+		const embed = embedMaker(message.guild, reportData, reportCode)
+		message.channel.send(embed);
+		message.delete();
 	} catch (error) {
-		return console.log(error.message);
+		return console.log(error);
 	}
 });
 
