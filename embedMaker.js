@@ -1,9 +1,9 @@
 const Discord = require("discord.js")
-const {timeData, inTime} = require("./dungeonTimes")
+const { timeData, inTime } = require("./dungeonTimes")
 const {
-	getCompletionTime,
-	getSpecName,
-	getBackgroundUrl,
+    getCompletionTime,
+    getSpecName,
+    getBackgroundUrl,
 } = require("./logsApi/linkData");
 
 /**
@@ -24,11 +24,11 @@ module.exports = (guild, data, reportCode) => {
         relatedFight.duration - timeData[relatedFight.encounter.name][timed - 1] * 1000)
 
     const embed = new Discord.MessageEmbed()
-	embed.setColor("#edae1a")
-		.setTitle(`${relatedFight.encounter.name} +**${relatedFight.bracketData}**`)
+    embed.setColor("#edae1a")
+        .setTitle(`${relatedFight.encounter.name} +**${relatedFight.bracketData}**`)
         .setURL("https://www.warcraftlogs.com/reports/" + reportCode + "#fight=last")
         .addField(
-            teamData.map( item =>
+            teamData.map(item =>
                 `${getIconEmoji(guild, `${item.class.toLowerCase()}_${item.spec.toLowerCase()}`)} **${item.name}**`
             ),
             '\u200B',
@@ -41,7 +41,7 @@ module.exports = (guild, data, reportCode) => {
             true
         )
         .setImage(getBackgroundUrl(relatedFight.encounter.name));
-        
+
     return embed;
 
 }

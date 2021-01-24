@@ -50,7 +50,8 @@ client.on("message", async (message) => {
 		message.channel.send(embed);
 		message.delete();
 	} catch (error) {
-		return console.log(error);
+		message.channel.send(error)
+		return console.log(error)
 	}
 });
 
