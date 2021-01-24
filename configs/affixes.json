@@ -1,0 +1,119 @@
+{
+	"affixes": [
+		{
+			"id": 1,
+			"icon": "inv_misc_volatilewater.jpg",
+			"name": "Overflowing"
+		},
+		{
+			"id": 2,
+			"icon": "spell_magic_lesserinvisibilty.jpg",
+			"name": "Skittish"
+		},
+		{
+			"id": 3,
+			"icon": "spell_shaman_lavasurge.jpg",
+			"name": "Volcanic"
+		},
+		{
+			"id": 4,
+			"icon": "spell_deathknight_necroticplague.jpg",
+			"name": "Necrotic"
+		},
+		{
+			"id": 5,
+			"icon": "spell_nature_massteleport.jpg",
+			"name": "Teeming"
+		},
+		{
+			"id": 6,
+			"icon": "ability_warrior_focusedrage.jpg",
+			"name": "Raging"
+		},
+		{
+			"id": 7,
+			"icon": "ability_warrior_battleshout.jpg",
+			"name": "Bolstering"
+		},
+		{
+			"id": 8,
+			"icon": "spell_shadow_bloodboil.jpg",
+			"name": "Sanguine"
+		},
+		{
+			"id": 9,
+			"icon": "achievement_boss_archaedas.jpg",
+			"name": "Tyrannical"
+		},
+		{
+			"id": 10,
+			"icon": "ability_toughness.jpg",
+			"name": "Fortified"
+		},
+		{
+			"id": 11,
+			"icon": "ability_ironmaidens_whirlofblood.jpg",
+			"name": "Bursting"
+		},
+		{
+			"id": 12,
+			"icon": "ability_backstab.jpg",
+			"name": "Grievous"
+		},
+		{
+			"id": 13,
+			"icon": "spell_fire_felflamering_red.jpg",
+			"name": "Explosive"
+		},
+		{
+			"id": 14,
+			"icon": "spell_nature_earthquake.jpg",
+			"name": "Quaking"
+		},
+		{
+			"id": 15,
+			"icon": "inv_chest_plate04.jpg",
+			"name": "Relentless"
+		},
+		{
+			"id": 16,
+			"icon": "achievement_nazmir_boss_ghuun.jpg",
+			"name": "Infested"
+		},
+		{
+			"id": 117,
+			"icon": "ability_racial_embraceoftheloa_bwonsomdi.jpg",
+			"name": "Reaping"
+		},
+		{
+			"id": 119,
+			"icon": "spell_shadow_mindshear.jpg",
+			"name": "Beguiling"
+		},
+		{
+			"id": 120,
+			"icon": "trade_archaeology_nerubian_obelisk.jpg",
+			"name": "Awakened"
+		},
+		{
+			"id": 121,
+			"icon": "spell_animarevendreth_buff.jpg",
+			"name": "Prideful"
+		},
+		{
+			"id": 122,
+			"icon": "spell_holy_prayerofspirit.jpg",
+			"name": "Inspiring"
+		},
+		{
+			"id": 123,
+			"icon": "spell_holy_prayerofshadowprotection.jpg",
+			"name": "Spiteful"
+		},
+		{
+			"id": 124,
+			"icon": "spell_nature_cyclone.jpg",
+			"name": "Storming"
+		}
+	]
+}
