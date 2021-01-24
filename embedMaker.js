@@ -1,10 +1,6 @@
-const Discord = require("discord.js")
-const { timeData, inTime } = require("./dungeonTimes")
-const {
-    getCompletionTime,
-    getSpecName,
-    getBackgroundUrl,
-} = require("./logsApi/linkData");
+const Discord = require("discord.js");
+const { timeData, inTime } = require("./dungeonTimes");
+const { getCompletionTime, getSpecName, getBackgroundUrl } = require("./logsApi/linkData");
 
 /**
  *
@@ -14,7 +10,11 @@ const {
  */
 module.exports = (guild, data, reportCode) => {
 	const relatedFight = data.report.rankings.data[0];
-	const teamData = relatedFight.team;
+    const rawTeamData = relatedFight.team;
+    let teamData = [];
+    teamData[0] = rawTeamData.find(element => element.role == 'Tank');
+    teamData[1] = rawTeamData.find(element => element.role == 'Healer');
+    const dpsTeamData = rawTeamData.filter(element => element.role == 'DPS');
 	const timed = inTime(relatedFight.encounter.name, relatedFight.duration);
 	const missedTime = getCompletionTime(
 		timed < 3
@@ -22,31 +22,37 @@ module.exports = (guild, data, reportCode) => {
 			  relatedFight.duration - timeData[relatedFight.encounter.name][timed] * 1000
 			: //Previous completion time
 			  relatedFight.duration - timeData[relatedFight.encounter.name][timed - 1] * 1000
-    );
+	);
 
+	const embed = new Discord.MessageEmbed();
+	embed
+		.setColor("#edae1a")
+		.setTitle(`${relatedFight.encounter.name} +**${relatedFight.bracketData}**`)
+		.setURL("https://www.warcraftlogs.com/reports/" + reportCode + "#fight=last")
+		.addField(
+			teamData.map(
+				(item) =>
+					`${getIconEmoji(guild, `${item.class.toLowerCase()}_${item.spec.toLowerCase()}`)}` +
+					`**${item.name} (${item.spec} ${item.class})**`
+			),
+			dpsTeamData.map(
+				(item) =>
+					`${getIconEmoji(guild, `${item.class.toLowerCase()}_${item.spec.toLowerCase()}`)}` +
+					`**${item.name}** **(${item.spec} ${item.class})**`
+			),
+			true
+		)
+		.addField(
+			`🕒 ${getCompletionTime(relatedFight.duration)}  **+${timed}**`,
+			(timed < 3 ? `*Missed +${timed + 1} by ${missedTime}*` : `*Over time of ${missedTime}*`) +
+				"\n\n" +
+				`\:skull: **${relatedFight.deaths}**   *-${getCompletionTime(relatedFight.deaths * 5000)}*`,
+			true
+		)
+		.setImage(getBackgroundUrl(relatedFight.encounter.name))
+		.setFooter(new Date(data.report.startTime));
 
-    const embed = new Discord.MessageEmbed()
-    embed.setColor("#edae1a")
-        .setTitle(`${relatedFight.encounter.name} +**${relatedFight.bracketData}**`)
-        .setURL("https://www.warcraftlogs.com/reports/" + reportCode + "#fight=last")
-        .addField(
-            teamData.map(item =>
-                `${getIconEmoji(guild, `${item.class.toLowerCase()}_${item.spec.toLowerCase()}`)} **${item.name}**`
-            ),
-            '\u200B',
-            true
-        )
-        .addField(
-            `🕒 ${getCompletionTime(relatedFight.duration)}  **+${timed}**`,
-            (timed < 3 ? `*Missed +${timed + 1} by ${missedTime}*` : `*Over time of ${missedTime}*`) + '\n\n'
-            + `\:skull: **${relatedFight.deaths}**   *-${getCompletionTime(relatedFight.deaths * 5000)}*`,
-            true
-        )
-        .setImage(getBackgroundUrl(relatedFight.encounter.name))
-        .setFooter(new Date(data.report.startTime));
-
-    return embed;
-
+	return embed;
 };
 
 /**
