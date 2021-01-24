@@ -9,17 +9,25 @@ module.exports = async function (token, code) {
 			Authorization: "Bearer " + token,
 		},
 		data: {
-			query:
-				`query reportData {\n  reportData{\n    report(\n      code: "${code}"\n    ) {\n      fights {\n        keystoneLevel\n        keystoneAffixes\n        keystoneTime\n        name\n      }\n      masterData {\n        actors(type:"player") {\n          name\n          icon\n          subType\n        }\n      }\n    }\n  }\n}`,
+			query: `
+			query reportData {
+				reportData{
+					report(
+						code: "${code}"
+					) {
+						graph(dataType:DamageDone, startTime:0 , endTime:999999999)
+						rankings(compare:Parses)
+						startTime
+					}
+				}
+			}`,
 			operationName: "reportData",
 		},
 	};
-	axios
+	return axios
 		.request(options)
 		.then(function (response) {
-			const parsedData = response.data;
-			console.log(JSON.stringify(parsedData));
-			return parsedData;
+			return response.data.data.reportData;
 		})
 		.catch(function (error) {
 			console.error(error);
