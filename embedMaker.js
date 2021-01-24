@@ -1,6 +1,10 @@
-const Discord = require("discord.js");
-const { timeData, inTime } = require("./dungeonTimes");
-const { getCompletionTime, getSpecName, getBackgroundUrl } = require("./logsApi/linkData");
+const Discord = require("discord.js")
+const { timeData, inTime } = require("./dungeonTimes")
+const {
+    getCompletionTime,
+    getSpecName,
+    getBackgroundUrl,
+} = require("./logsApi/linkData");
 
 /**
  *
@@ -21,32 +25,28 @@ module.exports = (guild, data, reportCode) => {
     );
 
 
-	const embed = new Discord.MessageEmbed();
-	embed
-		.setColor("#edae1a")
-		.setTitle(`${relatedFight.encounter.name} +**${relatedFight.bracketData}**`)
-		.setURL("https://www.warcraftlogs.com/reports/" + reportCode + "#fight=last")
-		.addField(
-			teamData.map(
-				(item) =>
-					`${getIconEmoji(guild, `${item.class.toLowerCase()}_${item.spec.toLowerCase()}`)} **${
-						item.name
-					}**`
-			),
-			"\u200B",
-			true
-		)
-		.addField(
-			`🕒 ${getCompletionTime(relatedFight.duration)}  **+${timed}**`,
-			(timed < 3 ? `*Missed +${timed + 1} by ${missedTime}*` : `*Over time of ${missedTime}*`) +
-				"\n\n" +
-				`\:skull: **${relatedFight.deaths}**   *-${getCompletionTime(relatedFight.deaths * 5000)}*`,
-			true
-		)
+    const embed = new Discord.MessageEmbed()
+    embed.setColor("#edae1a")
+        .setTitle(`${relatedFight.encounter.name} +**${relatedFight.bracketData}**`)
+        .setURL("https://www.warcraftlogs.com/reports/" + reportCode + "#fight=last")
+        .addField(
+            teamData.map(item =>
+                `${getIconEmoji(guild, `${item.class.toLowerCase()}_${item.spec.toLowerCase()}`)} **${item.name}**`
+            ),
+            '\u200B',
+            true
+        )
+        .addField(
+            `🕒 ${getCompletionTime(relatedFight.duration)}  **+${timed}**`,
+            (timed < 3 ? `*Missed +${timed + 1} by ${missedTime}*` : `*Over time of ${missedTime}*`) + '\n\n'
+            + `\:skull: **${relatedFight.deaths}**   *-${getCompletionTime(relatedFight.deaths * 5000)}*`,
+            true
+        )
         .setImage(getBackgroundUrl(relatedFight.encounter.name))
-        .setFooter(`Played on ${new Date(data.report.startTime)}`)
+        .setFooter(new Date(data.report.startTime));
 
-	return embed;
+    return embed;
+
 };
 
 /**
