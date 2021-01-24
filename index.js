@@ -1,10 +1,10 @@
-const getAccesToken = require("../logsApi/accessToken");
-const getReportData = require("../logsApi/reportData");
-const tokens = require("../discordTokens.json");
+const getAccesToken = require("./logsApi/accessToken");
+const getReportData = require("./logsApi/reportData");
+const tokens = require("./discordTokens.json");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require("fs");
-const embedMaker = require("../embedMaker");
+const embedMaker = require("./embedMaker");
 const files = fs.readdirSync(__dirname);
 
 client.on("ready", () => {
