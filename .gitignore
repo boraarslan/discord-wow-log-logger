@@ -1093,3 +1093,4 @@ node_modules/nvm/package.json
 node_modules/nvm/README.md
 node_modules/nvm/bin/aliases.json
 node_modules/nvm/bin/nvm
+discordTokens.json

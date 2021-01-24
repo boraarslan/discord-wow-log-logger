@@ -1,5 +1,6 @@
 const getAccesToken = require("./logsApi/accessToken");
 const getReportData = require("./logsApi/reportData");
+const tokens = require("./discordTokens.json");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require("fs");
@@ -55,5 +56,4 @@ client.on("message", async (message) => {
 	}
 });
 
-client.login("ODAyNDYwNjU1NTgzMTAwOTQ5.YAvjuQ.2-yg-TAl9h_JH14vKy-1KGxcR8Y");
-//ODAyMDg2MDMxNzI0OTA0NDg5.YAqG1A.LjMPbE1lbQj98lLTqdIqECMTP2U
+client.login(tokens.bottoken);
