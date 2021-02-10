@@ -1,5 +1,5 @@
-let timeData = {
-    "De Other Side": [2400, 1920, 1440],
+const timeData = {
+    "De Other Side": [2580, 2065, 1549],
     "Halls of Atonement": [1860, 1488, 1116],
     "Mists of Tirna Scithe": [1800, 1440, 1080],
     "Plaguefall": [2280, 1824, 1358],
