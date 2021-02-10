@@ -10,19 +10,23 @@ const { getCompletionTime, getSpecName, getBackgroundUrl } = require("./logsApi/
  */
 module.exports = (guild, data, reportCode) => {
 	const relatedFight = data.report.rankings.data[0];
-    const rawTeamData = relatedFight.team;
-    let teamData = [];
-    teamData[0] = rawTeamData.find(element => element.role == 'Tank');
-    teamData[1] = rawTeamData.find(element => element.role == 'Healer');
-    const dpsTeamData = rawTeamData.filter(element => element.role == 'DPS');
-	const timed = inTime(relatedFight.encounter.name, relatedFight.duration);
-	const missedTime = getCompletionTime(
-		timed < 3
-			? //Next completion time
-			  relatedFight.duration - timeData[relatedFight.encounter.name][timed] * 1000
-			: //Previous completion time
-			  relatedFight.duration - timeData[relatedFight.encounter.name][timed - 1] * 1000
-	);
+	const rawTeamData = relatedFight.team;
+	let teamData = [];
+	teamData[0] = rawTeamData.find((element) => element.role == "Tank");
+	teamData[1] = rawTeamData.find((element) => element.role == "Healer");
+	const dpsTeamData = rawTeamData.filter((element) => element.role == "DPS");
+	const chestCount = inTime(relatedFight.encounter.name, relatedFight.duration);
+	let nextTime;
+	let previousTime;
+	if (chestCount < 3)
+		nextTime = getCompletionTime(
+			relatedFight.duration - timeData[relatedFight.encounter.name][chestCount] * 1000
+		);
+
+	if (chestCount > 0)
+		previousTime = getCompletionTime(
+			(timeData[relatedFight.encounter.name][chestCount - 1] * 1000) - relatedFight.duration
+		);
 
 	const embed = new Discord.MessageEmbed();
 	embed
@@ -43,8 +47,9 @@ module.exports = (guild, data, reportCode) => {
 			true
 		)
 		.addField(
-			`🕒 ${getCompletionTime(relatedFight.duration)}  **+${timed}**`,
-			(timed < 3 ? `*Missed +${timed + 1} by ${missedTime}*` : `*Over time of ${missedTime}*`) +
+			`🕒 ${getCompletionTime(relatedFight.duration)}  **+${chestCount}**`,
+			    (chestCount < 3 ? `*Missed +${chestCount + 1} by ${nextTime}*` : ``) +
+				(chestCount > 0 ? `\n*Over time by ${previousTime}*` : ``) +
 				"\n\n" +
 				`\:skull: **${relatedFight.deaths}**   *-${getCompletionTime(relatedFight.deaths * 5000)}*`,
 			true
