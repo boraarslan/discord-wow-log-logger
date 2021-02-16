@@ -28,7 +28,7 @@ module.exports = async () => {
 			const client = new ClientCredentials(config);
 			const accessToken = await client.getToken();
 			console.log(accessToken.token);
-			fs.writeFileSync(JSON.stringify(accessToken.token, null, 2));
+			fs.writeFileSync("../token.json", JSON.stringify(accessToken.token, null, 2));
 
 			return accessToken.token.access_token;
 		} catch (error) {
