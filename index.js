@@ -1,6 +1,6 @@
 const getAccesToken = require("./logsApi/accessToken");
 const getReportData = require("./logsApi/reportData");
-const tokens = require("./discordTokens.json");
+const dotenv = require("dotenv").config();
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const fs = require("fs");
@@ -56,4 +56,4 @@ client.on("message", async (message) => {
 	}
 });
 
-client.login(tokens.bottoken);
+client.login(process.env.DISCORD_BOT_TOKEN);

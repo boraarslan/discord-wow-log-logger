@@ -1,10 +1,11 @@
 const { ClientCredentials } = require("simple-oauth2");
 const fs = require("fs");
+const dotenv = require("dotenv").config();
 
 const config = {
 	client: {
-		id: "9277ee48-dbeb-4519-adb5-18051f951ad4",
-		secret: "7WBGTl5hYmKIKz59unisu9I7XqzemOPkJHvLqlYV",
+		id: process.env.WL_CLIENT_SECRET,
+		secret: process.env.WL_CLIENT_ID,
 	},
 	auth: {
 		tokenHost: "https://www.warcraftlogs.com/oauth/token",
